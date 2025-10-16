@@ -1,7 +1,8 @@
-// import React from 'react';
+"use client";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Field, FieldLabel } from "@/components/ui/field";
+import Link from "next/link";
 
 // Helper component for each validation rule
 const ValidationRule = ({
@@ -26,6 +27,7 @@ interface PasswordFieldProps {
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   required: boolean;
   error: string | null;
+  isForgetPasswordRequired?: boolean;
 }
 
 export function PasswordField({
@@ -37,6 +39,7 @@ export function PasswordField({
   onBlur,
   required,
   error,
+  isForgetPasswordRequired
 }: PasswordFieldProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [validations, setValidations] = useState({
@@ -80,7 +83,17 @@ export function PasswordField({
 
   return (
     <Field className="relative">
-      <FieldLabel htmlFor={id}>{label}</FieldLabel>
+      <div className="flex justify-between">
+        <FieldLabel htmlFor={id}>{label}</FieldLabel>
+        {isForgetPasswordRequired && (
+          <Link
+            href="/forgot-password"
+            className="ml-auto text-sm underline-offset-4 hover:underline text-gray-400"
+          >
+            Forgot your password?
+          </Link>
+        )}
+      </div>
       <Input
         type="password"
         value={value}
@@ -92,11 +105,7 @@ export function PasswordField({
         required={required}
       />
 
-      {error && (
-        <p style={{ color: "red", fontSize: "0.8rem" }}>
-          {error}
-        </p>
-      )}
+      {error && <p style={{ color: "red", fontSize: "0.8rem" }}>{error}</p>}
 
       {/* --- The Validation "Popup" Box --- */}
       {isFocused && (

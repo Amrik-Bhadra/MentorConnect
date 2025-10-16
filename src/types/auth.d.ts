@@ -1,4 +1,4 @@
-export type UserRoles = "mentor" | "mentee" | "admin" | "";
+export type UserRoles = "mentor" | "mentee" | "";
 
 export interface SignupDataProps {
     name: string;
@@ -21,4 +21,11 @@ export interface OtpInputProps {
 export interface ResetPasswordProps {
     password: string;
     confirmPassword: string;
+}
+
+export interface User{
+    id: string;
+    name: string;
+    email: string;
+    role: string;
 }

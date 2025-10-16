@@ -17,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={cn("min-h-screen bg-background font-sans antialiased", inter.className)}>
-        <Header />
+        {/* <Header /> */}
         <main>{children}</main>
         {/* You can add a shared footer here later */}
       </body>
